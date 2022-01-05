@@ -1,0 +1,43 @@
+<h1 id="tableLabel">Cryptocurrency Price</h1>
+
+<p *ngIf="!cryptocurrency"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="cryptocurrency">
+  <thead>
+    <tr>
+      <th>
+        <h5>Select cryptocurrency</h5>
+        <select [(ngModel)]="selectedOption">
+          <option [value]="data.name" *ngFor="let data of cryptocurrency">
+            {{data.name}}
+          </option>
+        </select>
+      </th>
+      <th>
+        <div class="input-group mb-3">
+          <span class="input-group-text">$</span>
+          <input type="text" class="form-control" [(ngModel)]="amount" aria-label="Dollar amount (with dot and two decimal places)">
+        </div>
+      </th>
+      <th>
+        <div class="input-group mb-3">
+          <button (click)="PriceConversion()" class="btn btn-success form-control">Price Conversion</button>
+        </div>
+      </th>
+    </tr>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Symbol</th>
+      <th>Price USD</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of cryptocurrency">
+      <td>{{ data.id }}</td>
+      <td>{{ data.name }}</td>
+      <td>{{ data.symbol }}</td>
+      <td>{{ data.quote.usd.price }}</td>
+    </tr>
+  </tbody>
+</table>
